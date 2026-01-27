@@ -16,7 +16,7 @@
 
 ## **🏢 Affiliations**  
 <sup>1</sup> Department of Neurology, Hallym University Sacred Heart Hospital, Hallym University, Anyang, Gyeonggi, Republic of Korea  
-<sup>2</sup> Laboratory of Parkinson’s Disease and Neurodegenerative disease, Hallym Institute for Translational Medicine, Anyang, Gyeonggi, Republic of Korea 
+<sup>2</sup> Laboratory of Parkinson’s Disease and Neurodegenerative disease, Hallym Institute for Translational Medicine, Anyang, Gyeonggi, Republic of Korea  
 <sup>3</sup> Hallym Neurological Institute, Hallym University, Anyang, Gyeonggi, Republic of Korea  
 <sup>4</sup> Department of Neurology, Seoul National University Hospital, Seoul, Republic of Korea  
 <sup>5</sup> Department of Neurology, Yongin Severance Hospital, Yonsei University College of Medicine, Yongin, Gyeonggi, Republic of Korea  
