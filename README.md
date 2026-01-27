@@ -22,7 +22,7 @@
 <sup>5</sup> Department of Neurology, Yongin Severance Hospital, Yonsei University College of Medicine, Yongin, Gyeonggi, Republic of Korea  
 
 ## **✉️ Contacts**  
-🔗 ****Professor Young Eun Kim, MD., PhD.**** – [![ORCID](https://img.shields.io/badge/ORCID-0000--0002--7182--6569-green)](https://orcid.org/0000-0002-7182-6569) | ✉️ [Email](mailto:yekneurology@hallym.or.kr)  
+🔗 ****Professor Young Eun Kim, MD., PhD.**** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; – [![ORCID](https://img.shields.io/badge/ORCID-0000--0002--7182--6569-green)](https://orcid.org/0000-0002-7182-6569) | ✉️ [Email](mailto:yekneurology@hallym.or.kr)  
 🔗 **Huu Dat Nguyen, Engr., MMSc., PhD.** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; – [![ORCID](https://img.shields.io/badge/ORCID-0000--0003--2491--5566-green)](https://orcid.org/0000-0003-2491-5566) | ✉️ [Email](mailto:datneurosci@gmail.com)
 
 
