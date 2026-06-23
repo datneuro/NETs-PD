@@ -1,0 +1,36 @@
+# OS / editor
+.DS_Store
+~$*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# R
+.Rproj.user/
+.Rhistory
+.RData
+Rplots.pdf
+
+# Local data & results (not distributed — controlled-access / on request)
+data/
+results/
+results_stats/
+results_revision1/
+*.rds
+*.RData
+*.xlsx
+*.lif
+*.tif
+*.tiff
+*.ome.tif
+
+# Private / practical scripts — kept locally, not published
+serum_CitH3_demographics.R
+00_verify_channels.py
+lewy_extract_filter.py
+lewy_napari_curate.py
+03c_Cortex_vs_SN.R
+03c_cortex_vs_sn.R
