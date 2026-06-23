@@ -27,10 +27,7 @@ results_revision1/
 *.tiff
 *.ome.tif
 
-# Private / practical scripts — kept locally, not published
-serum_CitH3_demographics.R
-00_verify_channels.py
-lewy_extract_filter.py
-lewy_napari_curate.py
-03c_Cortex_vs_SN.R
-03c_cortex_vs_sn.R
+# Local-only working/QC scripts (kept private, not published)
+*_demographics.R
+*_qc.*
+*_local.*
