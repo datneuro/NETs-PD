@@ -4,12 +4,11 @@
 # ICC(2,1), between/within-subject variance partitioning, random-slope LRT in
 # controls, and a Bayesian (brms) ICC sensitivity analysis.
 # =============================================================================
-# Inputs (place in ./data or pass as the first command-line argument):
+# Inputs:
 #   df_normed_filtered_annotated.RData  -> NAME.log2.cpm.filtered.norm.df
 #   metaDataIR3.csv
 # Transcripts: PADI4-201 (ENST00000375448.4), PADI4-202 (ENST00000375453.5),
 #              MPO-201 (ENST00000225275.3)
-# Usage:  Rscript Longitudinal_Stability.R [DATA_DIR] [OUT_DIR]
 # Output: <OUT_DIR>/{data}/C_stability_*  (statistics + log)
 # =============================================================================
 
@@ -58,7 +57,7 @@ BRMS_CHAINS <- 4
 BRMS_ITER <- 4000
 BRMS_WARMUP <- 2000
 BRMS_SEED <- 42
-RUN_BRMS <- TRUE # set FALSE to skip Bayesian (faster testing)
+RUN_BRMS <- TRUE 
 
 # ── Load & prepare data ────────────────────────────────────────────────────────
 message("Loading expression data...")
@@ -129,8 +128,7 @@ for (iso in names(TRANSCRIPTS)) {
   # ── ICC via performance::icc() per plan specification ───────────────────────
   # performance::icc() returns ICC_adjusted = between-subject / total variance = ICC(2,1)
   # VarCorr extraction is kept ONLY for variance partitioning columns (pct_between, pct_within)
-  # Both methods should yield the same ICC value — logged for sanity check
-  icc_table <- iso_data %>%
+  # Both methods should yield the same ICC value 
     group_by(DIAGNOSIS) %>%
     group_map(function(df, key) {
       grp <- key$DIAGNOSIS

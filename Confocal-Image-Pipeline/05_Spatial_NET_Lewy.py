@@ -3,7 +3,7 @@
 05_Spatial_NET_Lewy.py — Spatial NET <-> Lewy (manually curated Lewy) + Monte Carlo null.
 Input:
   results_stats/master_NET_events_xyz.csv  (NET centroids, from 03_Extract_NET_Centroids.py)
-  results_stats/lewy_confirmed.csv         (manually curated Lewy from napari)
+  results_stats/lewy_confirmed.csv         
 Output:
   results_stats/master_spatial_events.csv  (event-level: True_NET + Random_Point, dist_to_nearest_lewy_um)
   -> consumed by 06_NET_Statistics.R (Module 2)

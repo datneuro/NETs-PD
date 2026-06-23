@@ -6,7 +6,7 @@ Step 1 of the confocal analysis pipeline (revised to fix the Leica LIF frame-seq
 
 TASKS:
   1. Scan the LIF folder, read metadata for all scenes in each file
-  2. Classify 3D-stack (Z>1) vs single-plane (Z=1, usually 4K representative)
+  2. Classify 3D-stack (Z>1) vs single-plane (Z=1)
   3. Export 3D scenes to OME-TIFF (preserve voxel size + channel info)
      * FIXED Z-C CHANNEL MIXING BY USING AICSImage AND RE-INDEXING THE FRAME ORDER
   4. Generate manifest.csv for the next script (02_Segment_Quantify_NETs.py)
@@ -21,7 +21,7 @@ INPUT:
 OUTPUT:
   out-dir/
     ├── tiff_3d/<lif_stem>__scene<idx>.ome.tif    # 3D stacks for analysis
-    ├── png_singleplane/<lif_stem>__scene<idx>.png # 4K reps (max projection)
+    ├── png_singleplane/<lif_stem>__scene<idx>.png # single-plane images
     ├── manifest.csv                              # used by script 02
     ├── manifest_template_metadata.csv            # USER FILLS before running 02
     └── preprocess_log.txt                        # diagnostic log
@@ -750,7 +750,7 @@ def main():
     logger.info(f"   - combo:     'Combo1' or 'Combo3'")
     logger.info(f"   - antibody:  'MPO_CitH3' or 'MPO_CitH3_aSyn'")
     logger.info(f"   - condition: 'HC'/'PD'")
-    logger.info(f"   - case_id: 'R1', 'R2', 'R3', ... (hay T1069a, T127, v.v.)")
+    logger.info(f"   - case_id: 'R1', 'R2', 'R3', ... )")
     logger.info(f"2. After filling, run:")
     logger.info(f"   python {Path(__file__).name} \\")
     logger.info(f"       --lif-dir {lif_dir} --out-dir {out_dir} \\")

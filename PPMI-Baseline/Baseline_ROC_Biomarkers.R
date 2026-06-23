@@ -202,7 +202,7 @@ log_md(capture.output(print(coef_panel)))
 log_md("```")
 log_md("")
 
-# DeLong test: is combined panel better than best single?
+# DeLong test
 best_single <- names(which.max(sapply(roc_results, function(r) auc(r$roc))))
 delong_compare <- roc.test(roc_results[[best_single]]$roc, roc_panel, method = "delong")
 log_md("### DeLong test: Combined vs ", best_single)
@@ -212,10 +212,8 @@ log_md("")
 roc_results[["Combined panel"]] <- list(roc = roc_panel, summary = panel_result)
 
 # =============================================================================
-# FIGURE: Publication-quality ROC plot
+# FIGURE: ROC plot
 # =============================================================================
-message("Generating ROC figure...")
-
 # Build ROC curve data frames
 roc_df_list <- lapply(names(roc_results), function(nm) {
   r <- roc_results[[nm]]$roc
@@ -229,7 +227,7 @@ roc_df_list <- lapply(names(roc_results), function(nm) {
 })
 roc_df_all <- bind_rows(roc_df_list)
 
-# AUC labels for legend
+# AUC labels
 auc_labels <- sapply(names(roc_results), function(nm) {
   res <- roc_results[[nm]]$summary
   if (nm == "Combined panel") {
@@ -285,7 +283,7 @@ ggsave(file.path(OUT_DIR, "pdf", "roc_panel.pdf"),
 ggsave(file.path(OUT_DIR, "png", "roc_panel.png"),
        fig_roc, width = 8, height = 8, dpi = 300)
 
-# Save AUC summary table
+# Save AUC
 auc_table <- bind_rows(lapply(names(roc_results), function(nm) {
   roc_results[[nm]]$summary
 }))

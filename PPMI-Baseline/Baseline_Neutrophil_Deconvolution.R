@@ -4,7 +4,7 @@
 # Tests whether the systemic PADI4 signal reflects neutrophil abundance or a
 # per-cell change in expression (addresses NET-signature specificity).
 # =============================================================================
-# Inputs (place in ./data or pass as the first command-line argument):
+# Inputs:
 #   CIBERSORT_ALL_Result_Dec30.RData -> `result` (BL samples x 22 LM22 cell types)
 #   PPMI_Blood_Chemistry_Hematology.csv -> clinical neutrophil % (HMT15, EVENT_ID SC)
 #   df_normed_filtered_annotated.RData, metaDataIR3.csv
@@ -13,7 +13,6 @@
 #   "deconvolution" — CIBERSORTx LM22 neutrophil fraction
 #   "lab_blood"     — PPMI clinical hematology neutrophil %
 #   "both"          — run both, side-by-side (default)
-# Usage:  Rscript Baseline_Neutrophil_Deconvolution.R [DATA_DIR] [OUT_DIR]
 # =============================================================================
 
 suppressPackageStartupMessages({
@@ -71,7 +70,7 @@ PADI4_GENE <- "PADI4"   # for gene-level deconvolution
 custom_colors <- c("HC" = "#648FFF", "Prodromal" = "#785EF0", "PD" = "#DC267F")
 
 # =============================================================================
-# PART 1: Load existing CIBERSORTx results (already run Dec 2024)
+# PART 1: Load existing CIBERSORTx results (retrieved run Dec 2024. HD Nguyen)
 # =============================================================================
 message("Part 1: Loading pre-computed CIBERSORTx results...")
 log_md("## Part 1: CIBERSORTx results (pre-computed Dec 2024)")
@@ -270,7 +269,7 @@ ggsave(file.path(OUT_DIR, "pdf", "DA_neutrophil_violin_deconv.pdf"),
 ggsave(file.path(OUT_DIR, "png", "DA_neutrophil_violin_deconv.png"),
        fig_neut, width = 6, height = 5, dpi = 300)
 
-# If lab data available, also make lab version
+# make lab version
 if (!is.null(lab_neut)) {
   ciber_meta_lab <- ciber_meta %>% filter(!is.na(neu_blood_pct))
   kw_lab <- kruskal.test(neu_blood_pct ~ DIAGNOSIS, data = ciber_meta_lab)
@@ -314,7 +313,7 @@ write_csv(ciber_full, file.path(OUT_DIR, "data", "DA_CIBERSORTx_full_22celltypes
 log_md("")
 
 # =============================================================================
-# HELPER: Run per-cell analysis for a given neutrophil source
+#  Run per-cell analysis for a given neutrophil source
 # =============================================================================
 # This function is called once or twice depending on NEUT_SOURCE
 run_percell_analysis <- function(data_with_neut, neut_col_name, source_label,
@@ -433,7 +432,7 @@ run_percell_analysis <- function(data_with_neut, neut_col_name, source_label,
 }
 
 # =============================================================================
-# HELPER: Isoform-level sensitivity — with vs without neutrophil adjustment
+# Ioform-level sensitivity — with vs without neutrophil adjustment
 # =============================================================================
 # Uses isoform-level log2CPM (already loaded from df_normed_filtered_annotated.RData)
 # instead of gene-level raw counts (Txi_gene, 2.4 GB — not needed).
@@ -625,7 +624,6 @@ all_sensitivity_results <- list()
 
 for (src in sources_to_run) {
   meta_for_sens <- ciber_meta
-  # For sensitivity, need fraction (0-1 scale) for lab blood
   if (src$tag == "labblood") {
     meta_for_sens$neutrophil_fraction_sens <- meta_for_sens[[src$col]] / 100
     sens_col <- "neutrophil_fraction_sens"

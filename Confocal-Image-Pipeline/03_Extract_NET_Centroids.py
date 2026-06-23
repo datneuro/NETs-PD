@@ -34,8 +34,7 @@ def norm01(img, bit):
     img = img.astype(np.float32); return img / {8:255.,12:4095.,16:65535.}.get(bit, max(1.0, img.max()))
 
 def highpass(img, radius_um, vox):
-    """High-pass = img - gaussian background. Background computed on a DOWNSAMPLED image then upscaled
-    -> ~10x faster for large sigma, nearly identical (background is low-frequency)."""
+    """High-pass = img - gaussian background. Background computed on a DOWNSAMPLED image then upscaled"""
     img = img.astype(np.float32)
     sig = np.array([radius_um/v if v>0 else 0 for v in vox], float)
     fac = np.maximum(1, np.floor(sig/4)).astype(int)        # downsample sao cho sigma_ds ~4px

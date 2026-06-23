@@ -74,16 +74,15 @@ CELLPOSE_DIAMETER_UM = 15.0
 CELLPOSE_STITCH_THRESHOLD = 0.25
 
 # Lewy Body Settings
-LEWY_MIN_VOL_UM3 = 10.0 # Increased size to filter out physiological puncta
+LEWY_MIN_VOL_UM3 = 10.0 
 
 # NET Detection Settings
-NET_BG_RADIUS_UM      = 20.0   # high-pass radius (OLD=5 -> fragmented; increased to keep structure bodies)
-NET_THRESH_FACTOR     = 0.7    # multiply the Otsu threshold to be more permissive (OLD=1.0)
-NET_USE_LI            = False  # True = use threshold_li instead of Otsu (more sensitive for dim signal)      
-COLOC_TOLERANCE_VOX   = 1      # dilate each mask before AND (co-loc tolerance, OLD=0)
-NET_CLOSING_RADIUS_UM = 1.0    # binary_closing to bridge fragments + fill holes after AND
-NET_MIN_VOL_UM3       = 3.0    # minimum volume threshold (OLD ~1µm³)
-
+NET_BG_RADIUS_UM      = 20.0   
+NET_THRESH_FACTOR     = 0.7    
+NET_USE_LI            = False     
+COLOC_TOLERANCE_VOX   = 1      
+NET_CLOSING_RADIUS_UM = 1.0    
+NET_MIN_VOL_UM3       = 3.0   
 # Monte Carlo Settings
 N_RANDOM_POINTS_PER_FOV = 1000
 

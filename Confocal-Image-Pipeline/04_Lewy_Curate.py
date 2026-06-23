@@ -27,11 +27,10 @@ CSV = os.path.join(BASE, "results_stats", "lewy_candidates.csv")
 os.makedirs(OUTDIR, exist_ok=True)
 
 # ── candidate Lewy criteria (permissive, to NOT miss weak Lewy) ──
-CAND_MIN_UM3, CAND_MAX_UM3 = 5.0, 8000.0   # drop small speckle + huge background blobs
-CAND_MIN_SOLIDITY = 0.20                    # drop diffuse objects (sticky background)
-CAND_MIN_ZSPAN = 3                          # must span >=3 slices (a true 3D structure)
-TOPN_PER_FOV = 24                           # number of candidates shown per FOV
-# auto-suggest (pre-tick) when clear:
+CAND_MIN_UM3, CAND_MAX_UM3 = 5.0, 8000.0  
+CAND_MIN_SOLIDITY = 0.20                    
+CAND_MIN_ZSPAN = 3                         
+TOPN_PER_FOV = 24                          
 AUTO_CONTRAST, AUTO_SOLIDITY = 4.0, 0.30
 
 def norm01(img, bit):

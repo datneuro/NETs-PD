@@ -29,7 +29,7 @@ res <- list()
 ## ───────────────────────── SN: HC vs PD ─────────────────────────
 sn <- fov %>% filter(region=="SN")
 
-# 1) ABUNDANCE: count/FOV (Poisson; fixed 1x field, so no offset needed)
+# 1) ABUNDANCE: count/FOV 
 cat("\n[1] SN abundance count/FOV\n")
 g <- glmer(n_net_real ~ condition + (1|case_id), data=sn, family=poisson)
 fe <- summary(g)$coefficients["conditionPD",]

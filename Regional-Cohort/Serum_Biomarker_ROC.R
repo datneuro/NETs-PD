@@ -17,11 +17,10 @@ CITH3_FILE <- file.path("data", "CitH3_final.xlsx")
 OUT_DIR    <- "results"
 
 if (!file.exists(MPO_FILE) || !file.exists(CITH3_FILE)) {
-  stop("Critical Error: One or both source Excel data matrices are missing. Verify paths.")
+  stop("Missing. Verify paths.")
 }
 
 # ── 1. Load and Compute MPO-DNA ROC Matrix ─────────────────────────────────────
-message("Extracting MPO-DNA Matrix & Executing Bootstrap Resampling...")
 df_mpo <- readxl::read_excel(MPO_FILE) %>%
   filter(!is.na(lg_MPO_DNA), !is.na(diag)) %>%
   mutate(response = ifelse(diag == "PD", 1, 0))
@@ -44,7 +43,6 @@ dat_mpo <- data.frame(
 )
 
 # ── 2. Load and Compute CitH3-DNA ROC Data ───────────────────────────────────
-message("Extracting CitH3-DNA Matrix & Executing Bootstrap Resampling...")
 df_cith3 <- readxl::read_excel(CITH3_FILE) %>%
   filter(!is.na(lg10CitH3), !is.na(diag)) %>%
   mutate(response = ifelse(diag == "PD", 1, 0))
@@ -52,7 +50,6 @@ df_cith3 <- readxl::read_excel(CITH3_FILE) %>%
 roc_cith3    <- pROC::roc(df_cith3$response, df_cith3$lg10CitH3, direction = ">", quiet = TRUE)
 ci_auc_cith3 <- pROC::ci.auc(roc_cith3)
 
-# Restored: Extract the mathematically optimal Youden coordinates
 coords_cith3 <- pROC::coords(roc_cith3, "best", ret = c("threshold", "specificity", "sensitivity"))
 
 set.seed(42)
@@ -71,7 +68,6 @@ df_merged_roc <- bind_rows(dat_mpo, dat_cith3) %>%
   mutate(Biomarker = factor(Biomarker, levels = c("MPO-DNA", "CitH3-DNA")))
 
 # ── 4. Setup Precision Nomenclature Subtitles (FULL INTEGRATION) ─────────────
-# Re-assembled with perfect synchronization of AUC, CI, Cut-offs, Sen, and Spec metrics
 stat_subtitle <- paste0(
   sprintf("MPO-DNA AUC: %.3f (95%% CI: [%.3f, %.3f]) | Optimal Cut-off: %.3f | Sen: %.1f%% | Spec: %.1f%%\n", 
           roc_mpo$auc, ci_auc_mpo[1], ci_auc_mpo[3], coords_mpo$threshold, coords_mpo$sensitivity*100, coords_mpo$specificity*100),
@@ -86,7 +82,6 @@ biomarker_colors <- c("MPO-DNA" = "#648FFF", "CitH3-DNA" = "#DC267F")
 # ─────────────────────────────────────────────────────────────────────────────
 # 5. RENDER CONSOLIDATED PUBLICATION-READY ROC PLOT
 # ─────────────────────────────────────────────────────────────────────────────
-message("Generating official unified ROC asset...")
 
 p_roc <- ggplot(df_merged_roc, aes(x = 1 - Specificity, y = Sensitivity, color = Biomarker)) +
   # Layer 1: Plot Reference Diagonal Line
@@ -123,6 +118,4 @@ p_roc <- ggplot(df_merged_roc, aes(x = 1 - Specificity, y = Sensitivity, color =
 
 # ── 6. Export Asset (Micro-expanded width to comfortably hold clinical text lines) ──
 ggsave(file.path(OUT_DIR, "pdf", "Supplementary_Figure_ROC_Biomarkers.pdf"), p_roc, width = 6.0, height = 4.8, device = "pdf")
-ggsave(file.path(OUT_DIR, "png", "Supplementary_Figure_ROC_Biomarkers.png"), p_roc, width = 6.0, height = 4.8, dpi = 300)
-
-message("Success: ROC figure saved to ", file.path(OUT_DIR, "pdf"))
+ggsave(file.path(OUT_DIR, "png", "Supplementary_Figure_ROC_Biomarkers.png"), p_roc, width = 6.0, height = 4.8, dpi = 600)

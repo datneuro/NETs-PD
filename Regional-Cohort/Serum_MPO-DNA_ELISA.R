@@ -2,7 +2,6 @@
 # Serum_MPO-DNA_ELISA.R
 # Serum MPO-DNA complex ELISA, HC vs PD + severity gradient (Figure 3a)
 # LM + emmeans + HC3 robust SE + stratified bootstrap + Bayesian (brms).
-# Usage:  Rscript Serum_MPO-DNA_ELISA.R [DATA_FILE] [OUT_DIR] [OUTCOME_VAR] [RUN_BRMS]
 # =============================================================================
 
 suppressPackageStartupMessages({
@@ -151,7 +150,6 @@ safe_pbcor <- function(x, y) {
 # =============================================================================
 # Load and preprocess data
 # =============================================================================
-message("Loading serum ELISA data...")
 
 if (!file.exists(DATA_FILE)) {
   stop("Input file not found: ", DATA_FILE)
@@ -193,7 +191,6 @@ log_md("")
 # =============================================================================
 # 1) Between-group HC vs PD
 # =============================================================================
-message("Running HC vs PD model...")
 
 df_group <- serum %>%
   filter(!is.na(outcome), !is.na(diag), !is.na(age), !is.na(sex))
@@ -267,7 +264,6 @@ log_md("")
 # =============================================================================
 # 2) Severity model: HC vs Mild PD vs Moderate PD + polynomial trend
 # =============================================================================
-message("Running severity model...")
 
 df_sev <- serum %>%
   filter(!is.na(outcome), !is.na(subDX), !is.na(age), !is.na(sex))
@@ -315,7 +311,6 @@ log_md("")
 # =============================================================================
 # 3) Clinical correlations (PD only)
 # =============================================================================
-message("Running clinical correlations...")
 
 clinical_vars <- c("HY", "updrs1", "updrs2", "updrs3", "updrst")
 clinical_vars <- clinical_vars[clinical_vars %in% names(serum)]
@@ -493,7 +488,6 @@ if (RUN_BRMS) {
 # =============================================================================
 # 5) Figures
 # =============================================================================
-message("Saving figures...")
 
 fig_group <- ggplot(serum %>% filter(!is.na(diag), !is.na(outcome)),
                     aes(x = diag, y = outcome, color = diag, fill = diag)) +

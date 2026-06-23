@@ -71,7 +71,6 @@ fit_lmm <- function(formula, data, label) {
     return(list(model = m, type = "lmer_bobyqa", label = label))
   }
 
-  # Fallback: random intercept only if the primary model failed OR was singular
   fi <- as.character(formula)
   fi_simple <- reformulate(
     sub("\\(timepoint_num\\|PATNO\\)", "(1|PATNO)", fi[3]),
